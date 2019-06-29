@@ -23,3 +23,48 @@
   box-shadow: unset;
   background-color: darken(map-get($colors, green), 3.5%);
 }
+
+.button-complete-all-tasks {
+  background: none;
+  border: none;
+  outline: transparent;
+  font-weight: 700;
+  color: map_get($colors, blue);
+  transition: all 200ms ease-in-out;
+}
+
+.button-complete-all-tasks:hover {
+  color: lighten(map-get($colors, blue), 7%);
+}
+
+.button-complete-all-tasks:active {
+  color: darken(map-get($colors, blue), 7%);
+}
+
+.button-complete-all-tasks:disabled {
+  color: map-get($colors, gray);
+  cursor: not-allowed;
+}
+
+.button-archive-one {
+  padding: .35rem 1rem;
+  border: none;
+  border-radius: 0.35rem;
+  color: white;
+  font-size: 12px;
+  height: 25px;
+  font-weight: 500;
+  outline: transparent;
+  background-color: #10bb07;
+  box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
+  transition: all 200ms ease-in-out;
+}
+
+.button-archive-one:hover {
+  background-color: lighten(map-get($colors, green), 3.5%);
+}
+
+.button-archive-one:active {
+  box-shadow: unset;
+  background-color: darken(map-get($colors, green), 3.5%);
+}
