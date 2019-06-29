@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve('public'),
-    publicPath: 'http://localhost:8080/public'
+    publicPath: 'http://localhost:8080/public/'
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -38,6 +38,12 @@ module.exports = {
           'babel-loader?cacheDirectory'
         ],
         include: path.resolve('src', 'client'),
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
       },
     ]
   },
