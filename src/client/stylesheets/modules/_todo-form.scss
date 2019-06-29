@@ -1,0 +1,33 @@
+.todo-form {
+  padding: 2rem 3.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  input {
+    min-width: 375px;
+    width: 100%;
+    margin: 0 18rem;
+    padding: .6rem;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    border: 1px solid map_get($colors, gray);
+    outline: none;
+    color: map_get($colors, darkgray);
+    transition: border-color 200ms ease-in-out;
+    background-image: linear-gradient(lighten(map_get($colors, lightgray), 2.5%), white, white);;
+  }
+
+  input:focus {
+    border: 1px solid map_get($colors, darkgray);
+  }
+
+  input::placeholder {
+    color: map_get($colors, gray);
+    transition: all 300ms ease;
+  }
+
+  input:focus::placeholder {
+    color: map_get($colors, darkgray);
+  }
+}
