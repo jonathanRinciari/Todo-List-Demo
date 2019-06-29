@@ -1,6 +1,6 @@
 // Navbar module
 .navbar {
-  padding: 1rem 3.5rem;
+  padding: .5rem 3.5rem;
   background-color: map-get($colors, lightgray);
   display: flex;
   flex-wrap: wrap;
@@ -9,11 +9,14 @@
   &__item {
     padding-right: 1.75rem;
     text-decoration: none;
-    color:  map-get($colors, darkgray);;
+    color:  map-get($colors, gray);
+    display: flex;
+    align-items: center;
   }
 
   &__item--active {
     font-weight: 700;
+    color:  map-get($colors, darkgray);
   }
 
   .link-wrapper {
