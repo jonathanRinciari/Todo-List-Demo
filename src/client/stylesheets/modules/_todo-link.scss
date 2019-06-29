@@ -1,0 +1,9 @@
+.todo-link {
+  cursor: pointer;
+  padding-left: 2rem;
+  margin-right: 1rem;
+  span {
+    color: map_get($colors, darkgray);
+    font-size: 1.6rem;
+  }
+}

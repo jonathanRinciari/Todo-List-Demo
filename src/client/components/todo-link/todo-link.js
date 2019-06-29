@@ -33,7 +33,9 @@ const TodoLink = ({ text, onClick }) => {
 
   return (
     <div className={baseCls} onClick={onClick}>
-      {text}
+      <span>
+        {text}
+      </span>
     </div>
   );
 };
