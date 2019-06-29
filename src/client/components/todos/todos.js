@@ -42,7 +42,6 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    * @param  {object} json - Resulting JSON from fetch
    */
   const deleteTodo = json => {
-    console.log(json);
     const index = todos.findIndex(todo => {
       return todo.id === json.id;
     });
@@ -126,6 +125,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
       return (
         <Todo
           key={todo.id}
+          id={todo.id}
           filtered={filtered}
           onClickDelete={onClickDelete.bind(this, todo)}
           onClickTodo={onClickTodo.bind(this, todo)}
