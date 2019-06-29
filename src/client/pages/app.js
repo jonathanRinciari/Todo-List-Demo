@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import TodosPage from './todos-page';
-import Header from './header';
+import Header from '../components/header/header';
 
 /**
  * Prop Types

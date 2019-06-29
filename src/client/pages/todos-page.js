@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { api, getApiPromise } from '../helpers/api';
-import Button from './button';
-import Navbar from './navbar';
-import TodoForm from './todo-form';
-import TodoLink from './todo-link';
-import Todos from './todos';
+import Button from '../components/button/button';
+import Navbar from '../components/navbar/navbar';
+import TodoForm from '../components/todo-form/todo-form';
+import TodoLink from '../components/todo-link/todo-link';
+import Todos from '../components/todos/todos';
 
 /**
  * TodosPage component

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { api } from '../helpers/api';
-import Todo from './todo';
+import { api } from '../../helpers/api';
+import Todo from '../todo/todo';
 
 const noop = () => {};
 
@@ -42,6 +42,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    * @param  {object} json - Resulting JSON from fetch
    */
   const deleteTodo = json => {
+    console.log(json);
     const index = todos.findIndex(todo => {
       return todo.id === json.id;
     });
@@ -52,7 +53,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
         ...todos.slice(index + 1),
       ]
     );
-  }
+  };
 
   /**
    * Callback function to replace todo with results of fetching the todo PUT endpoint
@@ -95,7 +96,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
     newTodo.archive = false;
 
     api('PUT', newTodo, putTodo);
-  }
+  };
 
   /**
    * Renders All Todos
@@ -107,7 +108,9 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
       return null;
     }
 
+
     return todos.map(todo => {
+
       let filtered;
       switch (filterBy) {
         case 'active':

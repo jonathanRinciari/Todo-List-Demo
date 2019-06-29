@@ -14,6 +14,6 @@ const devServerConfig = {
   publicPath: 'http://0.0.0.0:8080/public/',
   stats: 'errors-only',
   headers: { 'Access-Control-Allow-Origin': '*' },
-}
+};
 
 module.exports = new WebpackDevServer(compiler, devServerConfig);

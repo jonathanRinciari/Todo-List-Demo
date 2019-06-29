@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from './button';
-import TodoLink from './todo-link';
+import Button from '../button/button';
+import TodoLink from '../todo-link/todo-link';
 
 const noop = () => {};
 
@@ -51,7 +51,7 @@ const Todo = ({ filtered, onClickDelete, onClickTodo, status, text }) => {
       <Button text="Delete" onClick={onClickDelete} />
     </li>
   );
-}
+};
 
 Todo.propTypes = propTypes;
 Todo.defaultProps = defaultProps;
