@@ -8,6 +8,7 @@ import Navbar from '../components/navbar/navbar';
 import TodoForm from '../components/todo-form/todo-form';
 import TodoLink from '../components/todo-link/todo-link';
 import Todos from '../components/todos/todos';
+import TodoTracker from "../components/todo-tracker/todo-tracker";
 
 /**
  * TodosPage component
@@ -105,7 +106,7 @@ class TodosPage extends React.Component {
     return (
       <div className={this.baseCls}>
         <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
-
+        <TodoTracker/>
         <TodoForm onSubmit={this.addTodo} />
 
         <Todos
