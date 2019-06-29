@@ -1,12 +1,45 @@
 // Todo module.
 .todo {
-  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  border-top: 1px solid map_get($colors, lightgray);
+  border-bottom: 1px solid map_get($colors, lightgray);
+  text-decoration-color: transparent;
+  transition: all 500ms ease;
+  user-select: none;
+  align-items: center;
 
   &--status-complete {
-    text-decoration: line-through;
+
+    span {
+      text-decoration: line-through;
+      text-decoration-color: map_get($colors, darkgray);
+    }
   }
 
   &--filtered {
     display: none;
   }
+
+  .todo-image:hover {
+    cursor: pointer;
+    animation: wiggle 1s 1 ease-in-out;
+  }
+
+  .todo-link-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-end;
+  }
+}
+
+
+@keyframes wiggle {
+  0% {transform: rotate(10deg);}
+  25% {transform: rotate(-10deg);}
+  50% {transform: rotate(20deg);}
+  75% {transform: rotate(-5deg);}
+  100% {transform: rotate(0deg);}
 }

@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useState} from 'react';
+import Close from '../../assets/close.svg';
 
 import Button from '../button/button';
 import TodoLink from '../todo-link/todo-link';
+import Checkbox from "../checkbox/checkbox";
 
 const noop = () => {};
 
@@ -34,23 +36,43 @@ const defaultProps = {
  * Todo component
  * @returns {ReactElement}
  */
-const Todo = ({ filtered, onClickDelete, onClickTodo, status, text }) => {
+const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id}) => {
+
+  const [isChecked, setIsChecked] = useState(false);
+
   /**
    * Base CSS class
    */
   const baseCls = 'todo';
 
+
+
   const todoCls = baseCls
     + (status === 'complete' ? ' todo--status-complete' : '')
     + (filtered ? ' todo--filtered' : '');
 
-  return (
-    <li className={todoCls}>
-      <TodoLink text={text} onClick={onClickTodo} />
+  const onChangeHandler = () => {
+      setIsChecked(!isChecked)
+  };
 
-      <Button text="Delete" onClick={onClickDelete} />
-    </li>
-  );
+
+  const shouldRender = () => {
+    return isChecked && status === 'complete' ? (
+      <Button type="archive-one" text="Archive"/>
+    ) : null
+  };
+
+    return (
+      <li className={todoCls} style={{borderTop: 'unset'}}>
+        <Checkbox disabled={status === 'active'} isChecked={isChecked && status==='complete'} onChangeHandler={onChangeHandler} id={id}/>
+        <div className="todo-link-wrapper">
+          <TodoLink text={text} onClick={onClickTodo} />
+          {shouldRender()}
+        </div>
+        <img className={`${baseCls}-image`} onClick={onClickDelete} src={Close} alt="Close"/>
+
+      </li>
+    );
 };
 
 Todo.propTypes = propTypes;
