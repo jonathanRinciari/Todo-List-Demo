@@ -1,0 +1,8 @@
+.todo-tracker {
+  padding: 1.5rem 3.5rem;
+
+  .todo-tracker-counter {
+    color: map_get($colors, darkgray);
+    font-size: 18px;
+  }
+}
