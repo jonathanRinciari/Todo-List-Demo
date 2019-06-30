@@ -27,7 +27,7 @@ const defaultProps = {
  * Navbar component
  * @returns {ReactElement}
  */
-const Navbar = ({ filterBy, onClickFilter }) => {
+const Navbar = ({ filterBy, onClickFilter, archiveAllHandler}) => {
   /**
    * Base CSS class
    */
@@ -35,6 +35,9 @@ const Navbar = ({ filterBy, onClickFilter }) => {
 
   let activeLinkCls = `${baseCls}__item`;
   activeLinkCls += filterBy === 'active' ? ` ${baseCls}__item--active` : '';
+
+  let archiveLinkCls = `${baseCls}__item`;
+  archiveLinkCls += filterBy === 'archived' ? ` ${baseCls}__item--active` : '';
 
   let completedLinkCls = `${baseCls}__item`;
   completedLinkCls += filterBy === 'completed' ? ` ${baseCls}__item--active` : '';
@@ -57,20 +60,20 @@ const Navbar = ({ filterBy, onClickFilter }) => {
           Active
         </span>
         <span
-          className={activeLinkCls}
-          onClick={() => onClickFilter('active')}
-        >
-          Archived
-        </span>
-        <span
           className={completedLinkCls}
           onClick={() => onClickFilter('completed')}
         >
           Completed
         </span>
+        <span
+          className={archiveLinkCls}
+          onClick={() => onClickFilter('archived')}
+        >
+          Archived
+        </span>
       </div>
       <div className="archive-all-wrapper">
-        <Button type="archive-all" text="Archive All Completed" />
+        <Button onClick={archiveAllHandler} type="archive-all" text="Archive All Completed" />
       </div>
     </div>
   );
