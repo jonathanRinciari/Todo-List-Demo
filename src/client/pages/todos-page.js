@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { api, getApiPromise } from '../helpers/api';
+import {api, archiveAllTasks, completeAllTasks} from '../helpers/api';
 import Button from '../components/button/button';
 import Navbar from '../components/navbar/navbar';
 import TodoForm from '../components/todo-form/todo-form';
@@ -81,6 +81,17 @@ class TodosPage extends React.Component {
   }
 
   /**
+   * Completes all active tasks
+   */
+  handleCompleteAllTasks = () => {
+    completeAllTasks(this.updateTodos)
+  };
+
+  handleArchiveAllTasks = () => {
+    archiveAllTasks(this.updateTodos);
+  };
+
+  /**
    * Set filterBy state
    *
    * @param {string} filterBy - filterBy state
@@ -105,8 +116,8 @@ class TodosPage extends React.Component {
   render() {
     return (
       <div className={this.baseCls}>
-        <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
-        <TodoTracker/>
+        <Navbar archiveAllHandler={this.handleArchiveAllTasks} filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
+        <TodoTracker completeAllTasksHandler={this.handleCompleteAllTasks} count={this.state.todos.filter((todo) => todo.status === 'active').length}/>
         <TodoForm onSubmit={this.addTodo} />
 
         <Todos
