@@ -14,12 +14,17 @@
 
     span {
       text-decoration: line-through;
-      text-decoration-color: map_get($colors, darkgray);
+      text-decoration-color: map_get($colors, lightgrey);
+      color: map_get($colors, lightgrey)!important;
     }
   }
 
   &--filtered {
     display: none;
+  }
+
+  &--archived {
+    font-style: italic;
   }
 
   .todo-image:hover {
