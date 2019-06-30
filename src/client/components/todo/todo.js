@@ -45,18 +45,22 @@ const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id, archived,
    */
   const baseCls = 'todo';
 
-
-
   const todoCls = baseCls
     + (status === 'complete' ? ' todo--status-complete' : '')
     + (filtered ? ' todo--filtered' : '')
     + (archived ? ' todo--archived' : '');
 
+  /**
+   * Toggles checked state for todo
+   */
   const onChangeHandler = () => {
       setIsChecked(!isChecked)
   };
 
-
+  /**
+   *  Determines if archive button should be renders if status is complete and checkbox is active
+   * @returns {*}
+   */
   const shouldRender = () => {
     return isChecked && status === 'complete' ? (
       <Button onClick={() => {
