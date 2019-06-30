@@ -36,7 +36,7 @@ const defaultProps = {
  * Todo component
  * @returns {ReactElement}
  */
-const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id}) => {
+const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id, archived, archiveHandler}) => {
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -49,7 +49,8 @@ const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id}) => {
 
   const todoCls = baseCls
     + (status === 'complete' ? ' todo--status-complete' : '')
-    + (filtered ? ' todo--filtered' : '');
+    + (filtered ? ' todo--filtered' : '')
+    + (archived ? ' todo--archived' : '');
 
   const onChangeHandler = () => {
       setIsChecked(!isChecked)
@@ -58,7 +59,10 @@ const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id}) => {
 
   const shouldRender = () => {
     return isChecked && status === 'complete' ? (
-      <Button type="archive-one" text="Archive"/>
+      <Button onClick={() => {
+        archiveHandler();
+        onChangeHandler();
+      }} type={archived ? 'unarchive-one' : 'archive-one'} text={archived ? 'Unarchive' : 'Archive'}/>
     ) : null
   };
 
@@ -70,7 +74,6 @@ const Todo = ({filtered, onClickDelete, onClickTodo, status, text, id}) => {
           {shouldRender()}
         </div>
         <img className={`${baseCls}-image`} onClick={onClickDelete} src={Close} alt="Close"/>
-
       </li>
     );
 };
