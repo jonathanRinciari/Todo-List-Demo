@@ -10,7 +10,6 @@ export function api(method, data, cb) {
 
   promise.then(json => {
     if (typeof cb === 'function') {
-      console.log(json);
       cb(JSON.parse(json));
     }
   })
@@ -19,6 +18,10 @@ export function api(method, data, cb) {
   });
 }
 
+/**
+ * Completes all active tasks and returns an updated list of tasks
+ * @param cb - Callback for returned data
+ */
 export function completeAllTasks(cb) {
   let url = 'http://localhost:3000/todos/complete';
   const options = {
@@ -38,6 +41,10 @@ export function completeAllTasks(cb) {
     });
 }
 
+/**
+ *  Archives all completed tasks and returns an updated list of tasks
+ * @param cb - Callback for returned ata
+ */
 export function archiveAllTasks(cb) {
   let url = 'http://localhost:3000/todos/archive';
   const options = {
