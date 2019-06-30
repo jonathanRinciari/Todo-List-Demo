@@ -55,7 +55,7 @@
   height: 25px;
   font-weight: 500;
   outline: transparent;
-  background-color: #10bb07;
+  background-color: map-get($colors, green);
   box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
   transition: all 200ms ease-in-out;
 }
@@ -68,3 +68,27 @@
   box-shadow: unset;
   background-color: darken(map-get($colors, green), 3.5%);
 }
+
+.button-unarchive-one {
+  padding: .35rem 1rem;
+  border: none;
+  border-radius: 0.35rem;
+  color: white;
+  font-size: 12px;
+  height: 25px;
+  font-weight: 500;
+  outline: transparent;
+  background-color: map-get($colors, danger);
+  box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
+  transition: all 200ms ease-in-out;
+}
+
+.button-unarchive-one:hover {
+  background-color: lighten(map-get($colors, danger), 3.5%);
+}
+
+.button-unarchive-one:active {
+  box-shadow: unset;
+  background-color: darken(map-get($colors, danger), 3.5%);
+}
+
