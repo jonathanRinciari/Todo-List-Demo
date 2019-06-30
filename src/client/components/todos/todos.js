@@ -71,7 +71,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
         ...todos.slice(index + 1),
       ]
     );
-  }
+  };
 
   /**
    * Click handler for clicking on delete button
@@ -97,6 +97,12 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
     api('PUT', newTodo, putTodo);
   };
 
+  const archiveHandler = todo => {
+    const newTodo = {...todo};
+    newTodo.archive = newTodo.hasOwnProperty('archive') ? !todo.archive : false;
+    api('PUT', newTodo, putTodo);
+  };
+
   /**
    * Renders All Todos
    *
@@ -113,10 +119,13 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
       let filtered;
       switch (filterBy) {
         case 'active':
-          filtered = todo.status === 'complete';
+          filtered = (todo.status === 'complete' || todo.archive);
           break;
         case 'completed':
-          filtered = todo.status !== 'complete';
+          filtered = (todo.status !== 'complete' || todo.archive);
+          break;
+        case 'archived':
+          filtered = !(todo.status === 'complete' && todo.archive);
           break;
         default:
           filtered = false;
@@ -129,8 +138,10 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
           filtered={filtered}
           onClickDelete={onClickDelete.bind(this, todo)}
           onClickTodo={onClickTodo.bind(this, todo)}
+          archiveHandler={archiveHandler.bind(this, todo)}
           status={todo.status}
           text={todo.text}
+          archived={todo.archive}
         />
       );
     })
