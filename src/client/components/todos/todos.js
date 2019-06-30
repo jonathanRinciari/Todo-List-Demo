@@ -115,9 +115,9 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
 
 
     return todos.map(todo => {
-
       let filtered;
       switch (filterBy) {
+
         case 'active':
           filtered = (todo.status === 'complete' || todo.archive);
           break;
@@ -132,6 +132,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
       }
 
       return (
+
         <Todo
           key={todo.id}
           id={todo.id}
@@ -145,8 +146,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
         />
       );
     })
-  }
-
+  };
   return (
     <ul className={baseCls}>
       {renderTodos()}
