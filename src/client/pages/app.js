@@ -30,10 +30,7 @@ const App = ({ children }) => {
     <BrowserRouter>
       <div className={baseCls}>
         <Header />
-
-        <Route path="/">
-          <TodosPage />
-        </Route>
+        <Route path="/" component={TodosPage}/>
       </div>
     </BrowserRouter>
   );
