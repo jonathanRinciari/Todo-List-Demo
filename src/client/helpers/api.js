@@ -19,6 +19,44 @@ export function api(method, data, cb) {
   });
 }
 
+export function completeAllTasks(cb) {
+  let url = 'http://localhost:3000/todos/complete';
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+  fetch(url, options)
+    .then(response => {
+      if (response.status >= 400) {
+        response.json().then(err => console.error(err.message));
+      }
+      response.json().then((json) => cb(JSON.parse(json)));
+    });
+}
+
+export function archiveAllTasks(cb) {
+  let url = 'http://localhost:3000/todos/archive';
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+  fetch(url, options)
+    .then(response => {
+      if (response.status >= 400) {
+        response.json().then(err => console.error(err.message));
+      }
+      response.json().then((json) => cb(JSON.parse(json)));
+    });
+}
+
 /**
  * HTML request to the backend
  * @param  {string} method - Request method
@@ -38,7 +76,7 @@ export function getApiPromise(method, data) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
-  }
+  };
 
   if (data) {
     options.body = JSON.stringify({
