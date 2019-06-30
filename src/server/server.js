@@ -15,9 +15,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const todos = [
+let todos = [
   { id: 1, text: 'Hello, world!', status: statuses.active },
-  { id: 2, text: 'Pick up groceries', status: statuses.complete }
+  { id: 2, text: 'Pick up groceries', status: statuses.complete, archive: true}
 ];
 
 app.get('/', (req, res) => {
@@ -27,6 +27,24 @@ app.get('/', (req, res) => {
 
 app.get('/todos', (req, res) => {
   res.json(JSON.stringify(todos));
+});
+
+app.get('/todos/complete', (req, res) => {
+  todos = todos.map((todo) => {
+    todo.status = statuses.complete;
+    return todo;
+  });
+  res.status(200).json(JSON.stringify(todos));
+});
+
+app.get('/todos/archive', (req, res) => {
+  todos = todos.map((todo) => {
+   if (todo.status === 'complete') {
+     todo.archive = true;
+   }
+    return todo;
+  });
+  res.status(200).json(JSON.stringify(todos));
 });
 
 app.get('/todos/:id', (req, res) => {
