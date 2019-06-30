@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {api, archiveAllTasks, completeAllTasks} from '../helpers/api';
-import Button from '../components/button/button';
 import Navbar from '../components/navbar/navbar';
 import TodoForm from '../components/todo-form/todo-form';
-import TodoLink from '../components/todo-link/todo-link';
 import Todos from '../components/todos/todos';
 import TodoTracker from "../components/todo-tracker/todo-tracker";
+import {BrowserRouter, Route, Switch, Redirect, withRouter} from "react-router-dom";
 
 /**
  * TodosPage component
@@ -19,14 +18,14 @@ class TodosPage extends React.Component {
    * Base CSS class
    * @static
    */
-  static baseCls = 'todos-page'
+  static baseCls = 'todos-page';
 
   /**
    * Prop types
    * @static
    */
   static propTypes = {
-    params: PropTypes.object,
+    params: PropTypes.object
   };
 
   /**
@@ -37,15 +36,13 @@ class TodosPage extends React.Component {
    */
   constructor(props) {
     super(props);
-
     this.state = {
       todos: [],
-      filterBy: null,
+      filterBy: this.parseRoute(props.location.pathname)
     };
 
     this.addTodo = this.addTodo.bind(this);
     this.postTodo = this.postTodo.bind(this);
-    this.setFilterBy = this.setFilterBy.bind(this);
     this.updateTodos = this.updateTodos.bind(this);
   }
 
@@ -54,7 +51,27 @@ class TodosPage extends React.Component {
    */
   componentDidMount() {
     api('GET', null, this.updateTodos);
+    this.props.history.listen((location) => {
+      this.setState({filterBy: this.parseRoute(location.pathname)});
+    });
   }
+
+
+  /**
+   * Parses current route to determine the active filter for tasks
+   * @returns {string}
+   */
+  parseRoute = (path) => {
+    let filterBy = null;
+    if (path === '/active') {
+      filterBy = 'active';
+    } else if (path === '/completed') {
+      filterBy = 'completed';
+    } else if (path === '/archived') {
+      filterBy = 'archived';
+    }
+    return filterBy;
+  };
 
   /**
    * Add todo
@@ -87,18 +104,12 @@ class TodosPage extends React.Component {
     completeAllTasks(this.updateTodos)
   };
 
+  /**
+   * Archive all complete tasks
+   */
   handleArchiveAllTasks = () => {
     archiveAllTasks(this.updateTodos);
   };
-
-  /**
-   * Set filterBy state
-   *
-   * @param {string} filterBy - filterBy state
-   */
-  setFilterBy(filterBy) {
-    this.setState({ filterBy });
-  }
 
   /**
    * Update todos array state
@@ -114,20 +125,26 @@ class TodosPage extends React.Component {
    * @returns {ReactElement}
    */
   render() {
+    const { filterBy, todos } = this.state;
+
     return (
       <div className={this.baseCls}>
-        <Navbar archiveAllHandler={this.handleArchiveAllTasks} filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
-        <TodoTracker completeAllTasksHandler={this.handleCompleteAllTasks} count={this.state.todos.filter((todo) => todo.status === 'active').length}/>
+        <Navbar archiveAllHandler={this.handleArchiveAllTasks} filterBy={filterBy}/>
+        <TodoTracker completeAllTasksHandler={this.handleCompleteAllTasks} count={todos.filter((todo) => todo.status === 'active').length}/>
         <TodoForm onSubmit={this.addTodo} />
-
-        <Todos
-          filterBy={this.state.filterBy}
-          todos={this.state.todos}
-          updateTodos={this.updateTodos}
-        />
+        <BrowserRouter>
+          <Switch>
+            <Route path={["/", "/active", "/archived", "/completed"]} exact render={() => (
+              <Todos filterBy={filterBy}
+                     todos={todos}
+                     updateTodos={this.updateTodos}/>
+            )}/>
+            <Redirect from='*' to='/' />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
 }
 
-export default TodosPage;
+export default withRouter(TodosPage);
