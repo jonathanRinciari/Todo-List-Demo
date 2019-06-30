@@ -10,8 +10,7 @@ const noop = () => {};
  * @private
  */
 const propTypes = {
-  filterBy: PropTypes.string,
-  onClickFilter: PropTypes.func,
+  archiveAllHandler: PropTypes.func
 };
 
 /**
@@ -19,58 +18,51 @@ const propTypes = {
  * @private
  */
 const defaultProps = {
-  filterBy: '',
-  onClickFilter: noop,
+  archiveAllHandler: noop
 };
 
 /**
  * Navbar component
  * @returns {ReactElement}
  */
-const Navbar = ({ filterBy, onClickFilter, archiveAllHandler}) => {
+const Navbar = ({ archiveAllHandler}) => {
   /**
    * Base CSS class
    */
   const baseCls = 'navbar';
-
-  let activeLinkCls = `${baseCls}__item`;
-  activeLinkCls += filterBy === 'active' ? ` ${baseCls}__item--active` : '';
-
-  let archiveLinkCls = `${baseCls}__item`;
-  archiveLinkCls += filterBy === 'archived' ? ` ${baseCls}__item--active` : '';
-
-  let completedLinkCls = `${baseCls}__item`;
-  completedLinkCls += filterBy === 'completed' ? ` ${baseCls}__item--active` : '';
 
   return (
     <div className={baseCls}>
       <div className="link-wrapper">
         <NavLink
           to="/"
+          exact
           activeClassName={`${baseCls}__item--active`}
           className={`${baseCls}__item`}
-          onClick={() => onClickFilter('')}
         >
           All
         </NavLink>
-        <span
-          className={activeLinkCls}
-          onClick={() => onClickFilter('active')}
+        <NavLink
+          to="/active"
+          activeClassName={`${baseCls}__item--active`}
+          className={`${baseCls}__item`}
         >
           Active
-        </span>
-        <span
-          className={completedLinkCls}
-          onClick={() => onClickFilter('completed')}
+        </NavLink>
+        <NavLink
+          to="/completed"
+          activeClassName={`${baseCls}__item--active`}
+          className={`${baseCls}__item`}
         >
           Completed
-        </span>
-        <span
-          className={archiveLinkCls}
-          onClick={() => onClickFilter('archived')}
+        </NavLink>
+        <NavLink
+          to="/archived"
+          activeClassName={`${baseCls}__item--active`}
+          className={`${baseCls}__item`}
         >
           Archived
-        </span>
+        </NavLink>
       </div>
       <div className="archive-all-wrapper">
         <Button onClick={archiveAllHandler} type="archive-all" text="Archive All Completed" />
