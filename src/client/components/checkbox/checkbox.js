@@ -1,5 +1,17 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
+
+/**
+ * Prop Types
+ * @private
+ */
+const propTypes = {
+  isChecked: PropTypes.bool,
+  id: PropTypes.number,
+  disabled: PropTypes.bool,
+  onChangeHandler: PropTypes.func
+};
 
 const Checkbox = ({isChecked, onChangeHandler, id, disabled}) => {
   return(
@@ -9,5 +21,7 @@ const Checkbox = ({isChecked, onChangeHandler, id, disabled}) => {
     </p>
   )
 };
+
+Checkbox.propTypes = propTypes;
 
 export default Checkbox;
