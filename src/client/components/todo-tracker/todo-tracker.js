@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from "../button/button";
 import Status from '../../assets/status.svg';
+import PropTypes from "prop-types";
+import Todos from "../todos/todos";
 
 
 const TodoTracker = ({count, completeAllTasksHandler}) => {
@@ -27,4 +29,14 @@ const TodoTracker = ({count, completeAllTasksHandler}) => {
   )
 };
 
+/**
+ * Prop Types
+ * @private
+ */
+const propTypes = {
+  count: PropTypes.number,
+  completeAllTasksHandler: PropTypes.func
+};
+
+TodoTracker.propTypes = propTypes;
 export default TodoTracker;
