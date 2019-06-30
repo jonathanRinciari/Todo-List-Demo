@@ -4,5 +4,20 @@
   .todo-tracker-counter {
     color: map_get($colors, darkgray);
     font-size: 18px;
+    padding: .25rem;
+  }
+
+  .todo-tracker-all-tasks-complete {
+    display: flex;
+    align-items: center;
+
+    span {
+      color: map_get($colors, darkgrey);
+      font-weight: 600;
+    }
+
+    img {
+      margin-right: 1rem;
+    }
   }
 }
