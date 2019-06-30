@@ -10,7 +10,8 @@ const noop = () => {};
 const propTypes = {
   onClick: PropTypes.func,
   text: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 /**
@@ -20,7 +21,8 @@ const propTypes = {
 const defaultProps = {
   onClick: noop,
   text: '',
-  type: ''
+  type: '',
+  disabled: false
 };
 
 /**
