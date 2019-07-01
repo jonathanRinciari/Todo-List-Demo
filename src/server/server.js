@@ -30,7 +30,7 @@ app.get('/todos', (req, res) => {
   res.json(JSON.stringify(todos));
 });
 
-app.get('/todos/complete', (req, res) => {
+app.put('/todos/completeAllTasks', (req, res) => {
   todos = todos.map((todo) => {
     todo.status = statuses.complete;
     return todo;
@@ -38,7 +38,7 @@ app.get('/todos/complete', (req, res) => {
   res.status(200).json(JSON.stringify(todos));
 });
 
-app.get('/todos/archive', (req, res) => {
+app.put('/todos/archiveAllTasks', (req, res) => {
   todos = todos.map((todo) => {
    if (todo.status === 'complete') {
      todo.archive = true;
