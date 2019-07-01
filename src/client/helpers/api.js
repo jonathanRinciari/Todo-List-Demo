@@ -23,9 +23,9 @@ export function api(method, data, cb) {
  * @param cb - Callback for returned data
  */
 export function completeAllTasks(cb) {
-  let url = 'http://localhost:3000/todos/complete';
+  let url = 'http://localhost:3000/todos/completeAllTasks';
   const options = {
-    method: 'GET',
+    method: 'PUT',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -46,9 +46,9 @@ export function completeAllTasks(cb) {
  * @param cb - Callback for returned ata
  */
 export function archiveAllTasks(cb) {
-  let url = 'http://localhost:3000/todos/archive';
+  let url = 'http://localhost:3000/todos/archiveAllTasks';
   const options = {
-    method: 'GET',
+    method: 'PUT',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
